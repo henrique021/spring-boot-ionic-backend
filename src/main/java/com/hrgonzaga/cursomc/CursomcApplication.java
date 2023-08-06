@@ -1,4 +1,4 @@
-package com.hrgonzaga;
+package com.hrgonzaga.cursomc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
