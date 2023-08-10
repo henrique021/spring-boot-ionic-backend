@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.hrgonzaga.cursomc.domain.Categoria;
 import com.hrgonzaga.cursomc.domain.Cidade;
+import com.hrgonzaga.cursomc.domain.Cliente;
+import com.hrgonzaga.cursomc.domain.Endereco;
 import com.hrgonzaga.cursomc.domain.Estado;
 import com.hrgonzaga.cursomc.domain.Produto;
+import com.hrgonzaga.cursomc.domain.enums.TipoCliente;
 import com.hrgonzaga.cursomc.repository.CategoriaRepository;
 import com.hrgonzaga.cursomc.repository.CidadeRepository;
+import com.hrgonzaga.cursomc.repository.ClienteRepository;
+import com.hrgonzaga.cursomc.repository.EnderecoRepository;
 import com.hrgonzaga.cursomc.repository.EstadoRepository;
 import com.hrgonzaga.cursomc.repository.ProdutoRepository;
 
@@ -27,6 +32,10 @@ public class CursomcApplication implements CommandLineRunner {
 	private EstadoRepository estRep ;
 	@Autowired
 	private CidadeRepository cidRep ;
+	@Autowired
+	private ClienteRepository cliRep ;
+	@Autowired
+	private EnderecoRepository endRep ;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -49,6 +58,12 @@ public class CursomcApplication implements CommandLineRunner {
 		Cidade c2 = new Cidade(0,"São Paulo",est2);
 		Cidade c3 = new Cidade(0,"Campinas",est1);
 		
+		Cliente cli1 = new Cliente(0,"Maria Silvia","maria@gmail.com","36378912377",TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("27633323","93838323"));
+		
+		Endereco e1 = new Endereco(0,"Rua Flores","300","Apto 203","Jardim","3822834",c1,cli1);
+		Endereco e2 = new Endereco(0,"Avenida Matos","105","Sala 800","Centro","38777012",c2,cli1);
+		
 		
 		categoria1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
 		categoria2.getProdutos().addAll(Arrays.asList(p2));
@@ -64,7 +79,8 @@ public class CursomcApplication implements CommandLineRunner {
 		proRep.saveAllAndFlush(Arrays.asList(p1,p2,p3));
 		estRep.saveAll(Arrays.asList(est1,est2));
 		cidRep.saveAll(Arrays.asList(c1,c2,c3));
-		
+		cliRep.saveAll(Arrays.asList(cli1));
+		endRep.saveAll(Arrays.asList(e1,e2));
 		
 		
 		
