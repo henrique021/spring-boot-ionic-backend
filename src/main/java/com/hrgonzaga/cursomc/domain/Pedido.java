@@ -1,7 +1,7 @@
 package com.hrgonzaga.cursomc.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
@@ -38,11 +38,10 @@ public class Pedido implements Serializable {
 
 	}
 
-	public Pedido(int id, Date instante, Pagamento pagamento, Cliente cliente, Endereco enderecoDeEntrega) {
+	public Pedido(int id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
 		super();
 		this.id = id;
 		this.instante = instante;
-		this.pagamento = pagamento;
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}

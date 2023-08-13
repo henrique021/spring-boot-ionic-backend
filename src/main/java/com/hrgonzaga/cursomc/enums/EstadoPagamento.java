@@ -1,5 +1,7 @@
 package com.hrgonzaga.cursomc.enums;
 
+import com.hrgonzaga.cursomc.domain.enums.TipoCliente;
+
 public enum EstadoPagamento {
 
 	
@@ -31,6 +33,20 @@ public enum EstadoPagamento {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	public static EstadoPagamento toEnum(Integer cod) {
+		
+		if(cod == null) {
+			return null;
+		}
+		for(EstadoPagamento x : EstadoPagamento.values()) {
+			if(cod.equals(x.getId())) {
+				return x;
+			}
+		}
+		
+		throw new IllegalArgumentException("ID invalido: "+ cod);
 	}
 	
 	
