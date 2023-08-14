@@ -13,6 +13,7 @@ import com.hrgonzaga.cursomc.domain.Cidade;
 import com.hrgonzaga.cursomc.domain.Cliente;
 import com.hrgonzaga.cursomc.domain.Endereco;
 import com.hrgonzaga.cursomc.domain.Estado;
+import com.hrgonzaga.cursomc.domain.ItemPedido;
 import com.hrgonzaga.cursomc.domain.Pagamento;
 import com.hrgonzaga.cursomc.domain.PagamentoComBoleto;
 import com.hrgonzaga.cursomc.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.hrgonzaga.cursomc.repository.CidadeRepository;
 import com.hrgonzaga.cursomc.repository.ClienteRepository;
 import com.hrgonzaga.cursomc.repository.EnderecoRepository;
 import com.hrgonzaga.cursomc.repository.EstadoRepository;
+import com.hrgonzaga.cursomc.repository.ItemPedidoRepository;
 import com.hrgonzaga.cursomc.repository.PagamentoRepository;
 import com.hrgonzaga.cursomc.repository.PedidoRepository;
 import com.hrgonzaga.cursomc.repository.ProdutoRepository;
@@ -48,6 +50,8 @@ public class CursomcApplication implements CommandLineRunner {
 	private PedidoRepository pedRep ;
 	@Autowired
 	private PagamentoRepository pagRep ;
+	@Autowired
+	private ItemPedidoRepository itemPedRep ;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -100,6 +104,20 @@ public class CursomcApplication implements CommandLineRunner {
 							sdf.parse("20/10/2017 00:00"),null);
 		ped2.setPagamento(pagto2);
 		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped2.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		
+		
+		
 		catRep.saveAll(Arrays.asList(categoria1,categoria2));
 		proRep.saveAllAndFlush(Arrays.asList(p1,p2,p3));
 		estRep.saveAll(Arrays.asList(est1,est2));
@@ -108,6 +126,7 @@ public class CursomcApplication implements CommandLineRunner {
 		endRep.saveAll(Arrays.asList(e1,e2));
 		pedRep.saveAll(Arrays.asList(ped1,ped2));
 		pagRep.saveAll(Arrays.asList(pagto1,pagto2));
+		itemPedRep.saveAll(Arrays.asList(ip1,ip2,ip3));
 		
 		
 		
