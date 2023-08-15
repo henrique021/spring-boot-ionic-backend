@@ -26,7 +26,7 @@ public class Cliente implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String nome;
 	private String email;
 	private String cpfOuCnpj;
@@ -47,7 +47,7 @@ public class Cliente implements Serializable {
 		super();
 	}
 
-	public Cliente(int id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;

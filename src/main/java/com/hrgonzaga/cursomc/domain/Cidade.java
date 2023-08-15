@@ -19,7 +19,7 @@ public class Cidade implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String nome;
 
 	@JsonManagedReference
@@ -31,7 +31,7 @@ public class Cidade implements Serializable {
 		super();
 	}
 
-	public Cidade(int id, String nome, Estado estado) {
+	public Cidade(Integer id, String nome, Estado estado) {
 		super();
 		this.id = id;
 		this.nome = nome;

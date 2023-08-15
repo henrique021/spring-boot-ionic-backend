@@ -20,7 +20,7 @@ public class Estado implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String nome;
 	
 	@JsonBackReference
@@ -31,7 +31,7 @@ public class Estado implements Serializable {
 	}
 	
 
-	public Estado(int id, String nome) {
+	public Estado(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
