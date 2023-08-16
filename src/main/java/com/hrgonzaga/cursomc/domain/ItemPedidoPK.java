@@ -3,9 +3,12 @@ package com.hrgonzaga.cursomc.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
+
 
 @Embeddable
 public class ItemPedidoPK implements Serializable {
