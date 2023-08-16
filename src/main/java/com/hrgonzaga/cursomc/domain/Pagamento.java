@@ -3,7 +3,7 @@ package com.hrgonzaga.cursomc.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hrgonzaga.cursomc.enums.EstadoPagamento;
 
 import jakarta.persistence.Entity;
@@ -26,7 +26,7 @@ public class Pagamento implements Serializable {
 	private Integer  id;
 	private Integer estado;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId
