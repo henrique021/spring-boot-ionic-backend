@@ -49,7 +49,7 @@ public class Categoria implements Serializable {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
