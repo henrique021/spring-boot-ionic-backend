@@ -3,10 +3,12 @@ package com.hrgonzaga.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.hrgonzaga.cursomc.domain.Categoria;
 import com.hrgonzaga.cursomc.repository.CategoriaRepository;
+import com.hrgonzaga.cursomc.services.exception.DataIntegrityException;
 import com.hrgonzaga.cursomc.services.exception.ObjectNotFoundException;
 
 @Service
@@ -30,6 +32,15 @@ public class CategoriaService {
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+
+	public void delete(Integer id) {
+		find(id);
+		try {
+		repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível deletar uma categoria associada a produtos");
+		}
 	}
 
 }
