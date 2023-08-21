@@ -45,7 +45,7 @@ public class Categoria implements Serializable {
 		this.nome = nome;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
