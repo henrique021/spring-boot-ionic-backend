@@ -1,5 +1,6 @@
 package com.hrgonzaga.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class CategoriaService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível deletar uma categoria associada a produtos");
 		}
+	}
+
+	public List<Categoria> findAll() {
+		// TODO Auto-generated method stub
+		return repo.findAll();
 	}
 
 }
