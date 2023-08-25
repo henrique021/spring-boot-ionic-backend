@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+
 
 @Entity
 public class Categoria implements Serializable {
@@ -21,10 +22,13 @@ public class Categoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Length(min=5, max=80, message="Deve ser entre 5 e 80 caracteres")
 	private String nome;
 	
 	
 	@ManyToMany(mappedBy = "categorias")
+	
 	private List<Produto> produtos = new ArrayList<>();
 
 	public List<Produto> getProdutos() {
