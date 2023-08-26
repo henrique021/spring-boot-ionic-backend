@@ -5,12 +5,12 @@ public enum TipoCliente {
 	PESSOAFISICA(1,"Pessoa Física"),
 	PESSOAJURIDICA(2,"Pessoa Jurídica");
 	
-	private int id;
+	private Integer id;
 	private String nome;
 	
 	
 	
-	private TipoCliente(int id, String nome) {
+	private TipoCliente(Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;
 	}

@@ -30,7 +30,7 @@ public class Cliente implements Serializable {
 	private String nome;
 	private String email;
 	private String cpfOuCnpj;
-	private int tipo;
+	private Integer tipo;
 	
 	
 	@OneToMany(mappedBy="cliente")
@@ -54,14 +54,14 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 		this.email = email;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipo = tipo.getId();
+		this.tipo = (tipo == null) ? null : tipo.getId();
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
