@@ -1,6 +1,6 @@
 package com.hrgonzaga.cursomc.resources;
 
-import java.util.ArrayList;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.hrgonzaga.cursomc.domain.Cliente;
+import com.hrgonzaga.cursomc.domain.Categoria;
 import com.hrgonzaga.cursomc.domain.Cliente;
 import com.hrgonzaga.cursomc.dto.ClienteDTO;
+import com.hrgonzaga.cursomc.dto.ClienteNewDTO;
 import com.hrgonzaga.cursomc.services.ClienteService;
 
 import jakarta.validation.Valid;
@@ -73,6 +75,16 @@ public class ClienteResource {
 		Page<ClienteDTO> listDTO = list.map(obj -> new ClienteDTO(obj));
 
 		return ResponseEntity.ok().body(listDTO);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@RequestBody @Valid ClienteNewDTO objDto) {
+		Cliente obj = service.fromDto(objDto);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
+				path("/{id}").buildAndExpand(obj.getId()).toUri();
+
+		return ResponseEntity.created(uri).build();
 	}
 
 }
