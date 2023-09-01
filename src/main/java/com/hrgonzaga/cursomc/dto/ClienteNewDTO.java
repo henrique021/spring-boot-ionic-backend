@@ -2,13 +2,26 @@ package com.hrgonzaga.cursomc.dto;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.Length;
+
+import com.hrgonzaga.cursomc.services.validation.ClienteInsert;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 	
 	
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message="não pode ser vazio")
+	@Length(min=5, max=80, message="Deve ser entre 5 e 120 caracteres")
 	private String nome;
+	@NotEmpty(message="não pode ser vazio")
+	@Email
 	private String email;
+	@NotEmpty
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
