@@ -58,7 +58,7 @@ public class Cliente implements Serializable {
 		this.tipo = (tipo == null) ? null : tipo.getId();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
