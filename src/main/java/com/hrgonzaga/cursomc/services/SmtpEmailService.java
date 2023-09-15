@@ -20,7 +20,6 @@ public class SmtpEmailService extends AbstractEmailService{
 		LOG.info("Simulando envio de email...");
 		LOG.info("@@@@@@@@@@@@@@@@@@@@@@@@@@!!!!!!!!!####...");
 		LOG.info(msg.toString());
-		LOG.info("");
 		mailSender.send(msg);
 		LOG.info("Email enviado");
 		
