@@ -12,6 +12,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -29,7 +30,8 @@ public class SecurityConfig {
 	private static final String[] PUBLIC_MATCHERS = {
 			"/h2-console/**",
 			"/produtos/**",
-			"/categorias/**"
+			"/categorias/**",
+			"/clientes/**"
 	};
 	
 	
@@ -52,6 +54,8 @@ public class SecurityConfig {
 			  .requestMatchers(antMatcher(HttpMethod.GET,"/produtos/**"))
 			  .permitAll()
 			  .requestMatchers(antMatcher(HttpMethod.GET,"/categorias/**"))
+			  .permitAll()
+			  .requestMatchers(antMatcher(HttpMethod.GET,"/clientes/**"))
 			  .permitAll()
 			  .requestMatchers(antMatcher("/h2-console/**"))
 			  .permitAll()
@@ -76,7 +80,10 @@ public class SecurityConfig {
 	  }
 	  
 	  
-	  
+	  @Bean
+	  public BCryptPasswordEncoder bCryptPasswordencoder() {
+		  return new BCryptPasswordEncoder();
+	  }
 	
 
 }

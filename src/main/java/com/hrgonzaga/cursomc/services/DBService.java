@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hrgonzaga.cursomc.domain.Categoria;
@@ -18,6 +19,7 @@ import com.hrgonzaga.cursomc.domain.PagamentoComBoleto;
 import com.hrgonzaga.cursomc.domain.PagamentoComCartao;
 import com.hrgonzaga.cursomc.domain.Pedido;
 import com.hrgonzaga.cursomc.domain.Produto;
+import com.hrgonzaga.cursomc.domain.enums.Perfil;
 import com.hrgonzaga.cursomc.domain.enums.TipoCliente;
 import com.hrgonzaga.cursomc.enums.EstadoPagamento;
 import com.hrgonzaga.cursomc.repository.CategoriaRepository;
@@ -34,6 +36,8 @@ import com.hrgonzaga.cursomc.repository.ProdutoRepository;
 @Service
 public class DBService {
 	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	@Autowired
 	private CategoriaRepository catRep ;
 	@Autowired
@@ -84,11 +88,16 @@ public class DBService {
 	Cidade c2 = new Cidade(null,"São Paulo",est2);
 	Cidade c3 = new Cidade(null,"Campinas",est1);
 	
-	Cliente cli1 = new Cliente(null,"Maria Silvia","hrgonnzaga@gmail.com","36378912377",TipoCliente.PESSOAFISICA);
+	Cliente cli1 = new Cliente(null,"Maria Silvia","hrgonnzaga@gmail.com","36378912377",TipoCliente.PESSOAFISICA,pe.encode("1324"));
 	cli1.getTelefones().addAll(Arrays.asList("27633323","93838323"));
+	
+	Cliente cli2 = new Cliente(null,"Ana Abdomen","henrique.emailcurso@gmail.com","39800230017",TipoCliente.PESSOAFISICA,pe.encode("1324"));
+	cli2.getTelefones().addAll(Arrays.asList("235461236","512315164"));
+	cli2.addPerfil(Perfil.ADMIN);
 	
 	Endereco e1 = new Endereco(null,"Rua Flores","300","Apto 203","Jardim","3822834",c1,cli1);
 	Endereco e2 = new Endereco(null,"Avenida Matos","105","Sala 800","Centro","38777012",c2,cli1);
+	Endereco e3 = new Endereco(null,"Avenida Floriano","2106",null,"Centro","25845662",c2,cli2);
 	
 
 	
@@ -148,8 +157,8 @@ public class DBService {
 	proRep.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11));
 	estRep.saveAll(Arrays.asList(est1,est2));
 	cidRep.saveAll(Arrays.asList(c1,c2,c3));
-	cliRep.saveAll(Arrays.asList(cli1));
-	endRep.saveAll(Arrays.asList(e1,e2));
+	cliRep.saveAll(Arrays.asList(cli1,cli2));
+	endRep.saveAll(Arrays.asList(e1,e2,e3));
 	pedRep.saveAll(Arrays.asList(ped1,ped2));
 	pagRep.saveAll(Arrays.asList(pagto1,pagto2));
 	itemPedRep.saveAll(Arrays.asList(ip1,ip2,ip3));
